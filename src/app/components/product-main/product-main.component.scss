@@ -1,0 +1,190 @@
+:host {
+    height: 100%;
+    padding: 2% 5%;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+
+
+    .border {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .container {
+            display: flex;
+            width: 92%;
+            height: 90%;
+            position: relative;
+
+
+            .product-container {
+                width: 100%;
+                height: auto;
+                margin: 10%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .product-image {
+                    width: 30%;
+                    display: flex;
+
+                    img {
+                        width: 100%;
+                        height: 400px;
+                        object-fit: contain;
+                    }
+                }
+
+                .product-info-container {
+                    width: 70%;
+                    height: 100%;
+                    margin-left: 10%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    .product-info {
+                        width: 100%;
+                        height: 80%;
+
+                        .product-title {
+                            font-size: 36px;
+
+                            .product-name {
+                                font-weight: 700;
+                            }
+                        }
+
+                        .product-brand {
+                            font-size: 26px;
+                            color: #737373;
+                        }
+
+                        .product-scoring {
+                            margin-top: 10px;
+                            display: flex;
+                            align-items: center;
+
+                            .product-score {
+                                font-size: 40px;
+
+                                .unknown-score {
+                                    color: #737373;
+                                }
+                            }
+
+                            .product-nutriscore {
+                                margin-left: 40px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                img {
+                                    width: 100px;
+
+                                    &.nutriscore-unknown {
+                                        opacity: 0.4;
+                                    }
+                                }
+                            }
+
+                            .product-ecoscore {
+                                margin-left: 40px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                img {
+                                    width: 60px;
+                                }
+                            }
+                        }
+
+                        .ingredients {
+                            margin-top: 20px;
+                            font-size: 18px;
+
+                            .ingredients-title {
+                                font-weight: 600;
+                            }
+
+                            .unknown-ingredients {
+                                color: #737373;
+                            }
+                        }
+
+                        .additional-info-container {
+                            margin-top: 20px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 18px;
+
+                            .additional-info {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+
+                                .additional-info-title {
+                                    font-weight: 600;
+                                    margin-right: 40px;
+                                }
+
+                                .info-icon {
+                                    margin-left: 15px;
+                                    display: flex;
+
+                                    .info-button {
+                                        display: flex;
+                                        align-items: center;
+                                    }
+
+                                    img {
+                                        width: 20px;
+                                        
+                                        &.check-icon {
+                                            filter: invert(54%) sepia(46%) saturate(689%) hue-rotate(64deg) brightness(92%) contrast(87%);
+                                        }
+
+                                        &.i-icon {
+                                            filter: invert(48%) sepia(0%) saturate(1821%) hue-rotate(317deg) brightness(94%) contrast(98%);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        .right-button {
+            position: absolute;
+            left: 92%;
+            width: 30px;
+            transition: filter 0.5s ease;
+
+            .right-chevron {                
+                filter: invert(48%) sepia(0%) saturate(1821%) hue-rotate(317deg) brightness(94%) contrast(98%);
+            }
+            &:hover {
+                filter: brightness(0%);
+            }
+        }
+        
+    }
+
+}

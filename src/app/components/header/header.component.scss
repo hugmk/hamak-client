@@ -1,0 +1,59 @@
+
+.header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .content {
+        height: 100%;
+        width: 100%;
+        margin-left: 8%;
+        margin-right: 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 50px;
+
+        .link-logo {
+            display: flex;
+            height: 100%;
+
+            .logo {
+                height: 100%;
+            }
+        }
+
+        .search-bar {
+            min-width: 30%;
+            border-radius: 25px;
+            border: solid 2px #737373;
+
+            .search-bar-content {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10%;
+                margin: 8px 6%;
+
+                .search-svg {
+                    width: 20px;
+                    filter: invert(48%) sepia(0%) saturate(1821%) hue-rotate(317deg) brightness(94%) contrast(98%);
+                }
+
+                .input {
+                    border: none;
+                    outline: none;
+                    width: 100%;
+                    font-size: 18px;
+                }
+                ::placeholder {
+                    opacity: 1;
+                    color: #737373;
+                    font-family: 'Poppins', sans-serif;
+                }
+            }
+        }
+    }
+}

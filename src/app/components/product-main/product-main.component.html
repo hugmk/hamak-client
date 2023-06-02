@@ -1,0 +1,85 @@
+<ng-container *ngIf="(infoModalService.modalVisible$ | async) as modalVisible">
+    <app-info-modal (click)="infoModalService.closeModal()" [item]="modalInfo"></app-info-modal>
+</ng-container>
+  
+
+<div class="content">
+    <div class="border">
+        <div class="container">
+            <div class="product-container">
+                <div class="product-image">
+                    <img src="{{ product.imageUrl }}" alt="">
+                </div>
+                <div class="product-info-container">
+                    <div class="product-info">
+                        <div class="product-title">
+                            <span class="product-name">{{ product.name }}</span>
+                            <span *ngIf="product.quantity">
+                                - {{ product.quantity }}
+                            </span>
+                        </div>
+                        <div class="product-brand" *ngIf="product.brand">
+                            {{ product.brand }}
+                        </div>
+                        <div class="product-scoring">
+                            <div class="product-score">
+                                <span *ngIf="product.calculatedScore">{{ product.calculatedScore | number:'1.0-0' }}</span>
+                                <span *ngIf="!product.calculatedScore" class="unknown-score">?</span>
+                                <span>/100</span>
+                            </div>
+                            <div class="product-nutriscore">
+                                <img src="{{ nutriscorePath }}" alt="" class="{{ nutriscoreUnknown }}">
+                            </div>
+                            <div class="product-ecoscore">
+                                <img src="{{ ecoscorePath }}" alt="">
+                            </div>
+                        </div>
+
+                        <div class="ingredients">
+                            <span class="ingredients-title">Ingrédients : </span>
+                            <span *ngIf="product.ingredients">{{ product.ingredients }}</span>
+                            <span *ngIf="!product.ingredients" class="unknown-ingredients">N/A</span>
+                        </div>
+
+                        <div class="additional-info-container">
+                            <div class="additional-info">
+                                <span class="additional-info-title">Additifs</span>
+                                <span class="info-number">{{ product.additives.length }}</span>
+                                <span class="info-icon">
+                                    <button *ngIf="product.additives.length > 0" class="button info-button" (click)="onMoreInfo('Additifs', product.additives)">
+                                        <img src="../../../assets/circle-info.svg" alt="" class="i-icon">
+                                    </button>
+                                    <img *ngIf="product.additives.length == 0" src="../../../assets/circle-check.svg" alt="" class="check-icon">
+                                </span>
+                            </div>
+                            <div class="additional-info">
+                                <span class="additional-info-title">Allergènes</span>
+                                <span class="info-number">{{ product.allergens.length }}</span>
+                                <span class="info-icon">
+                                    <button *ngIf="product.allergens.length > 0" class="button info-button" (click)="onMoreInfo('Allergènes', product.allergens)">
+                                        <img src="../../../assets/circle-info.svg" alt="" class="i-icon">
+                                    </button>
+                                    <img *ngIf="product.allergens.length == 0" src="../../../assets/circle-check.svg" alt="" class="check-icon">
+                                </span>
+                            </div>
+                            <div class="additional-info">
+                                <span class="additional-info-title">Traces</span>
+                                <span class="info-number">{{ product.traces.length }}</span>
+                                <span class="info-icon">
+                                    <button *ngIf="product.traces.length > 0" class="button info-button" (click)="onMoreInfo('Traces', product.traces)">
+                                        <img src="../../../assets/circle-info.svg" alt="" class="i-icon">
+                                    </button>
+                                    <img *ngIf="product.traces.length == 0" src="../../../assets/circle-check.svg" alt="" class="check-icon">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="button right-button" (click)="onNutrientInfo()">
+            <img src="../../../assets/chevron-right.svg" alt="" class="right-chevron">
+        </button>
+    </div>
+</div>

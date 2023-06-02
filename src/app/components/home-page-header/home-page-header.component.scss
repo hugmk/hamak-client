@@ -1,0 +1,19 @@
+
+.header {
+    height: 105px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+    .content {
+        height: 100%;
+
+        .link-logo {
+
+            .logo {
+                height: 100%;
+            }
+        }
+    }
+}
