@@ -10,8 +10,6 @@
     flex-direction: column;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
-    background-color: blueviolet;
-
 
     .border {
         height: 100%;
@@ -19,22 +17,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: aquamarine;
 
         .container {
             display: flex;
             width: 92%;
             height: 90%;
             position: relative;
-            background-color: red;
-            gap: 5%;
+            justify-content: space-between;
 
             .nutritional-container {
                 height: auto;
-                margin: 10% 0 10% 10%;
+                width: 50%;
+                margin: 0 0 0 5%;
                 display: flex;
                 flex-direction: column;
-                background-color: antiquewhite;
+                justify-content: center;
 
                 .product-info {
                     .product-title {
@@ -78,8 +75,16 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: aqua;
                 width: 50%;
+                margin-right: 2%;
+
+                .chart {
+                    width: 85%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
         }
 

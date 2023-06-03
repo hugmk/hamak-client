@@ -14,6 +14,7 @@ import { ProductNutritionFactsComponent } from './components/product-nutrition-f
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { ProductAnalysisComponent } from './components/product-analysis/product-analysis.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -25,7 +26,8 @@ registerLocaleData(localeFr);
     HomePageComponent,
     ProductMainComponent,
     InfoModalComponent,
-    ProductNutritionFactsComponent
+    ProductNutritionFactsComponent,
+    ProductAnalysisComponent
   ],
   imports: [
     BrowserModule,

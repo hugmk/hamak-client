@@ -24,48 +24,48 @@
                             <tbody>
                                 <tr>
                                     <td class="nutritional-title">Énergie</td>
-                                    <td *ngIf="product.energy_kcal_100g">{{ product.energy_kcal_100g | number : '1.0-2' }}kCal</td>
-                                    <td *ngIf="!product.energy_kcal_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.energy_kcal_100g || product.energy_kcal_100g === 0">{{ product.energy_kcal_100g | number : '1.0-2' }}kCal</td>
+                                    <td *ngIf="!product.energy_kcal_100g && product.energy_kcal_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">Matières grasses</td>
-                                    <td *ngIf="product.fat_100g">{{ product.fat_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.fat_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.fat_100g || product.fat_100g === 0">{{ product.fat_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.fat_100g && product.fat_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">&emsp;Graisses saturées</td>
-                                    <td *ngIf="product.saturated_fat_100g">{{ product.saturated_fat_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.saturated_fat_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.saturated_fat_100g || product.saturated_fat_100g === 0">{{ product.saturated_fat_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.saturated_fat_100g && product.saturated_fat_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">Glucides</td>
-                                    <td *ngIf="product.carbohydrates_100g">{{ product.carbohydrates_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.carbohydrates_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.carbohydrates_100g || product.carbohydrates_100g === 0">{{ product.carbohydrates_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.carbohydrates_100g && product.carbohydrates_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">&emsp;Sucres</td>
-                                    <td *ngIf="product.sugars_100g">{{ product.sugars_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.sugars_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.sugars_100g || product.sugars_100g === 0">{{ product.sugars_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.sugars_100g && product.sugars_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">Fibres</td>
-                                    <td *ngIf="product.fiber_100g">{{ product.fiber_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.fiber_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.fiber_100g || product.fiber_100g === 0">{{ product.fiber_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.fiber_100g && product.fiber_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">Protéines</td>
-                                    <td *ngIf="product.proteins_100g">{{ product.proteins_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.proteins_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.proteins_100g || product.proteins_100g === 0">{{ product.proteins_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.proteins_100g && product.proteins_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">Sel</td>
-                                    <td *ngIf="product.salt_100g">{{ product.salt_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.salt_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.salt_100g || product.salt_100g === 0">{{ product.salt_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.salt_100g && product.salt_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
                                     <td class="nutritional-title">&emsp;Sodium</td>
-                                    <td *ngIf="product.sodium_100g">{{ product.sodium_100g | number : '1.0-2' }}g</td>
-                                    <td *ngIf="!product.sodium_100g" class="not-available">N/A</td>
+                                    <td *ngIf="product.sodium_100g || product.sodium_100g === 0">{{ product.sodium_100g | number : '1.0-2' }}g</td>
+                                    <td *ngIf="!product.sodium_100g && product.sodium_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -73,7 +73,9 @@
                 </div>
             </div>
             <div class="chart-container">
-                <canvas  id="MyChart" >{{ chart }}</canvas>
+                <div class="chart">
+                    <canvas id="MyChart" >{{ chart }}</canvas>
+                </div>
             </div>
         </div>
 

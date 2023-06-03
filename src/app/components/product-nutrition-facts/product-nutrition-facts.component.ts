@@ -11,45 +11,28 @@ import Chart from 'chart.js/auto';
 export class ProductNutritionFactsComponent {
   public product!: Product;
   public chart: any;
+  private pieChartFields = ["Matières grasses", "Glucides", "Fibres", "Protéines", "Sel"];
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.product = history.state.product;
     console.log(this.product);
-    this.createChart();
+    this.createChart();    
   }
 
   createChart(){
-
     this.chart = new Chart("MyChart", {
-      type: 'pie', //this denotes tha type of chart
-
-      data: {// values on X-Axis
-        labels: ['Red', 'Pink','Green','Yellow','Orange','Blue', ],
-	       datasets: [{
-          label: 'My First Dataset',
-          data: [300, 240, 100, 432, 253, 34],
-          backgroundColor: [
-            'red',
-            'pink',
-            'green',
-            'yellow',
-            'orange',
-            'blue',			
-          ],
-          hoverOffset: 4
-        }],
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              display: false,
-            }
+      type: 'pie',
+      data: {
+        labels: this.pieChartFields,
+        datasets: [
+          {
+            data: [this.product.fat_100g, this.product.carbohydrates_100g, this.product.fiber_100g, this.product.proteins_100g, this.product.salt_100g],
           }
-        }
-      });
+        ]
+      },
+    });
   }
 
   onMainInfo() {
