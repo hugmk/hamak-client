@@ -1,0 +1,57 @@
+:host {
+    height: 100%;
+    padding: 2% 5%;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+
+    .border {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .container {
+            display: flex;
+            width: 92%;
+            height: 90%;
+            position: relative;
+            justify-content: space-between;
+
+            
+        }
+
+        .right-button {
+            position: absolute;
+            left: 92%;
+            width: 30px;
+            transition: filter 0.5s ease;
+            
+            &:hover {
+                filter: brightness(0%);
+            }
+        }
+
+        .left-button {
+            position: absolute;
+            left: 6%;
+            width: 30px;
+            transition: filter 0.5s ease;
+            
+            &:hover {
+                filter: brightness(0%);
+            }
+        }
+
+        .chevron {                
+            filter: invert(48%) sepia(0%) saturate(1821%) hue-rotate(317deg) brightness(94%) contrast(98%);
+        }
+    }
+}
