@@ -24,10 +24,11 @@
             height: 90%;
             position: relative;
             flex-direction: column;
+            justify-content: center;
             background-color: antiquewhite;
-            margin: 5% 5% 0 5%;
 
             .product-container {
+                margin: 0 0 0 5%;
                 height: auto;
                 display: flex;
                 flex-direction: column;
@@ -49,35 +50,35 @@
                 }
             }
 
-            .charts-section {
+            .alternatives-container {
                 display: flex;
-                justify-content: space-around;
-                align-items: center;
-                height: 100%;
+                flex-direction: column;
+                justify-content: center;
+                height: 70%;
 
-                .chart-one {
-                    background-color: rosybrown;
-                    width: 48%;
-                    height: 80%;
+                .alternatives-title {
+                    font-size: 26px;
                 }
 
-                .chart-two {
-                    background-color: violet;
-                    width: 48%;
-                    height: 80%;
+                .alternatives-content {
+                    
+                    .no-alternatives {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            width: 50px;
+                            filter: invert(48%) sepia(0%) saturate(1821%) hue-rotate(317deg) brightness(94%) contrast(98%);
+                        }
+
+                        .no-alternatives-message {
+                            font-size: 26px;
+                            color: #737373;
+                        }
+                    }
                 }
-
-            }
-        }
-
-        .right-button {
-            position: absolute;
-            left: 92%;
-            width: 30px;
-            transition: filter 0.5s ease;
-            
-            &:hover {
-                filter: brightness(0%);
             }
         }
 

@@ -13,6 +13,7 @@ export class HomePageComponent {
   public searchMessage = "Recherchez parmi des centaines de milliers de produits !";
   public topProductsTitle = "Le top du top";
   public topProducts: Product[] = [];
+  public searchInput = "";
 
   constructor(private productService: ProductsService, private router: Router) { }
 
@@ -25,5 +26,12 @@ export class HomePageComponent {
 
   onClickProduct(product: Product) {
     this.router.navigateByUrl('/productMain', { state: { product: product } });
+  }
+
+  search() {
+    console.log("enter search");
+    if(this.searchInput.length >= 3) {
+      this.router.navigateByUrl('/searchResults', { state: { searchTerm: this.searchInput } });
+    }
   }
 }

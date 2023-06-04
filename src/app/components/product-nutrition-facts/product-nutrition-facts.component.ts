@@ -40,7 +40,6 @@ export class ProductNutritionFactsComponent {
   }
 
   onBiAnalysis() {
-    console.log("go to bi analysis");
-    // this.router.navigateByUrl('/nutritionFacts', { state: { product: this.product } });
+    this.router.navigateByUrl('/productAnalysis', { state: { product: this.product } });
   }
 }

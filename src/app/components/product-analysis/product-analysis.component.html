@@ -1,14 +1,32 @@
 <div class="content">
     <div class="border">
-        <button class="button left-button" (click)="onBiAnalysis()">
+        <button class="button left-button" (click)="onNutritionFacts()">
             <img src="../../../assets/chevron-left.svg" alt="" class="chevron">
         </button>
 
         <div class="container">
-            
+            <div class="product-container">
+                <div class="product-info">
+                    <div class="product-title">
+                        <span class="product-name">{{ product.name }}</span>
+                    </div>
+                    <div class="product-brand" *ngIf="product.brand">
+                        {{ product.brand }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-section">
+                <div class="chart-one">
+                    chart one
+                </div>
+                <div class="chart-two">
+                    chart two
+                </div>
+            </div>
         </div>
 
-        <button class="button right-button" (click)="onAlternatives()">
+        <button class="button right-button" (click)="onAlternatives()" *ngIf="showAlternativesBtn">
             <img src="../../../assets/chevron-right.svg" alt="" class="chevron">
         </button>
     </div>

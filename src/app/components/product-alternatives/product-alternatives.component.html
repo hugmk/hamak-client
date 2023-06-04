@@ -1,0 +1,61 @@
+<div class="content">
+    <div class="border">
+        <button class="button left-button" (click)="onBiAnalysis()">
+            <img src="../../../assets/chevron-left.svg" alt="" class="chevron">
+        </button>
+
+        <div class="container">
+            <div class="product-container">
+                <div class="product-info">
+                    <div class="product-title">
+                        <span class="product-name">{{ product.name }}</span>
+                    </div>
+                    <div class="product-brand" *ngIf="product.brand">
+                        {{ product.brand }}
+                    </div>
+                </div>
+            </div>
+            <div class="alternatives-container">
+                <div class="alternatives-title" *ngIf="hasAlternatives">Alternatives</div>
+                <div class="alternatives-content">
+                    <div class="no-alternatives" *ngIf="!hasAlternatives">
+                        <div class="cross-icon">
+                            <img src="../../../assets/cross.svg" alt="">
+                        </div>
+                        <div class="no-alternatives-message">
+                            Nous n'avons pas pu trouver d'alternative à ce produit.
+                        </div>
+                    </div>
+                    <div class="alternatives" *ngIf="hasAlternatives">
+                        <button class="button alternative" *ngFor="let alternative of alternatives" (click)="onClickAlternative(alternative)">
+                            <div class="alternative-content">
+                                <div class="alternative-image">
+                                    <div class="image-container">
+                                        <img src="{{ alternative.imageUrl }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="alternative-info">
+                                    <div class="main-info">
+                                        <div class="alternative-title">
+                                            {{ (alternative.name.length > 24) ? (alternative.name | slice:0:24) + '...':(alternative.name) }}
+                                            <span class="alternative-quantity" *ngIf="alternative.quantity">
+                                                - {{ alternative.quantity }}
+                                            </span>
+                                        </div>
+                                        <div class="alternative-brand" *ngIf="alternative.brand">
+                                            {{ (alternative.brand.length > 24) ? (alternative.brand | slice:0:24) + '...':(alternative.brand) }}
+                                        </div>
+                                    </div>
+            
+                                    <div class="alternative-score">
+                                        {{ alternative.calculatedScore | number:'1.0-0'}}/100
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
