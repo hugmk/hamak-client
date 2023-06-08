@@ -24,7 +24,6 @@
             height: 90%;
             position: relative;
             flex-direction: column;
-            background-color: antiquewhite;
             justify-content: space-between;
 
             .results-title {
@@ -42,6 +41,8 @@
                 flex-wrap: wrap;
                 align-content: flex-start;
                 gap: 20px;
+                justify-content: center;
+                transition: filter 0.2s;
     
                 .product {
                     border-radius: 10px;
@@ -51,6 +52,7 @@
                     justify-content: center;
                     height: 300px;
                     width: 215px;
+                    flex-basis: 17%;
     
                     .product-content {
                         height: 100%;
@@ -108,6 +110,11 @@
                         outline: solid 2px rgba(240, 192, 110, 0.8);
                     }
                 }
+
+                &.blurred {
+                    filter: blur(3px);
+                    pointer-events: none;
+                }
             }
 
             .pagination {
@@ -116,7 +123,7 @@
                 justify-content: center;
                 align-items: center;
                 margin-top: 15px;
-
+                transition: filter 0.2s;
 
                 .pagination-container {
                     display: flex;
@@ -139,6 +146,11 @@
                             filter: invert(87%) sepia(61%) saturate(1822%) hue-rotate(309deg) brightness(105%) contrast(88%);
                         }
                     }
+                }
+
+                &.blurred {
+                    filter: blur(3px);
+                    pointer-events: none;
                 }
             }
             

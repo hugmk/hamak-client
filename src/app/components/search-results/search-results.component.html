@@ -6,7 +6,7 @@
                 <span class="search-term">"{{ searchTerm }}"</span>
             </div>
 
-            <div class="products">
+            <div class="products" [class.blurred]="isLoading">
                 <button class="button product" *ngFor="let product of resultProducts" (click)="onClickProduct(product)">
                     <div class="product-content">
                         <div class="product-image">
@@ -35,7 +35,7 @@
                 </button>
             </div>
 
-            <div class="pagination">
+            <div class="pagination" [class.blurred]="isLoading">
                 <div class="pagination-container">
                     <button class="prev-button button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
                         <img src="../../../assets/chevron-left.svg" alt="">

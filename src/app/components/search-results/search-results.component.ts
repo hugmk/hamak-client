@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 const LIMIT_PER_PAGE = 10;
 
@@ -16,10 +17,14 @@ export class SearchResultsComponent {
   public totalPages = 0;
   public totalProducts = 0;
   public searchTerm = "";
+  public isLoading = false;
 
-  constructor(private productsService: ProductsService, private router: Router) { }
+  constructor(private productsService: ProductsService, private router: Router, 
+    private spinnerService: SpinnerService) { }
 
   ngOnInit() {
+    this.spinnerService.showSpinner();
+    this.isLoading = true;
     console.log(history.state.searchTerm);
     this.searchTerm = history.state.searchTerm;
     this.productsService.searchProducts(this.searchTerm, 1, LIMIT_PER_PAGE).subscribe(res => {
@@ -27,6 +32,8 @@ export class SearchResultsComponent {
       this.currentPage = res.currentPage;
       this.totalPages = res.totalPages;
       this.totalProducts = res.totalProducts;
+      this.spinnerService.hideSpinner();
+      this.isLoading = false;
     });
     
   }
@@ -63,11 +70,15 @@ export class SearchResultsComponent {
 
   goToPage(pageNb: number): void {
     console.log("go to page number " + pageNb);
+    this.spinnerService.showSpinner();
+    this.isLoading = true;
     this.productsService.searchProducts(this.searchTerm, pageNb, LIMIT_PER_PAGE).subscribe(res => {
       this.resultProducts = res.products;
       this.currentPage = res.currentPage;
       this.totalPages = res.totalPages;
       this.totalProducts = res.totalProducts;
+      this.spinnerService.hideSpinner();
+      this.isLoading = false;
     });
   }
 

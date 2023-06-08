@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { SpinnerService } from './services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,20 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent {
   title = 'hamak';
   isHomePage: boolean = true;
+  showSpinner = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private spinnerService: SpinnerService) {
     this.isHomePage = false;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isHomePage = this.router.isActive('/', true) || event.urlAfterRedirects === '/';
       }
+    });
+    this.spinnerService.spinner$.subscribe((data: boolean) => {
+      setTimeout(() => {
+        this.showSpinner = data ? data : false;
+      });
+      console.log(this.showSpinner);
     });
   }
 }

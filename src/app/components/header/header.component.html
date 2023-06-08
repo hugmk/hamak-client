@@ -7,7 +7,10 @@
         <div class="search-bar">
             <div class="search-bar-content">
                 <img class="search-svg" src="../../../assets/loupe.svg" alt="">
-                <input type="text" placeholder="Rechercher un produit..." class="input">
+                <form (ngSubmit)="search()">
+                    <input type="text" placeholder="Rechercher un produit..." class="input" [(ngModel)]="searchInput" name="searchInput">
+                    <input type="submit" hidden>
+                </form>
             </div>
         </div>
     </div>

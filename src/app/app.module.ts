@@ -17,6 +17,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { ProductAnalysisComponent } from './components/product-analysis/product-analysis.component';
 import { ProductAlternativesComponent } from './components/product-alternatives/product-alternatives.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -31,6 +32,7 @@ registerLocaleData(localeFr);
     ProductNutritionFactsComponent,
     ProductAnalysisComponent,
     ProductAlternativesComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
