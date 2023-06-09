@@ -128,8 +128,9 @@
                 .pagination-container {
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
+                    justify-content: center;
                     width: 32%;
+                    gap: 15px;
                 }
 
                 .next-button, .prev-button {

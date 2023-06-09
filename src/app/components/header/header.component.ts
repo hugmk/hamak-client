@@ -15,10 +15,15 @@ export class HeaderComponent {
     console.log("enter search");
     if(this.searchInput.length >= 3) {
       const state = { searchTerm: this.searchInput };
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/searchResults'], { state });
-        window.location.reload();
-      });
+      if(this.router.url == "/searchResults") {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/searchResults'], { state });
+          window.location.reload();
+        });
+      }
+      else {
+        this.router.navigateByUrl('/searchResults', { state: { searchTerm: this.searchInput } });
+      }
     }
   }
 }

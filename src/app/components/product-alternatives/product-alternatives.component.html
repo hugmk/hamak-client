@@ -18,7 +18,7 @@
             <div class="alternatives-container">
                 <div class="alternatives-title" *ngIf="hasAlternatives">Alternatives</div>
                 <div class="alternatives-content">
-                    <div class="no-alternatives" *ngIf="!hasAlternatives">
+                    <div class="no-alternatives" *ngIf="!hasAlternatives && !isLoading">
                         <div class="cross-icon">
                             <img src="../../../assets/cross.svg" alt="">
                         </div>
