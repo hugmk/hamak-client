@@ -1,9 +1,17 @@
 <div class="content">
     <div class="border">
         <div class="container">
-            <div class="results-title">
-                {{ totalProducts }} résultat(s) pour
-                <span class="search-term">"{{ searchTerm }}"</span>
+            <div class="results-header">
+                <div class="results-title">
+                    {{ totalProducts }} résultat(s) pour
+                    <span class="search-term">"{{ searchTerm }}"</span>
+                </div>
+                <div class="filter-results">
+                    <select [(ngModel)]="selectedFilter" (change)="applyFilter()">
+                        <option value="asc">Score croissant</option>
+                        <option value="desc">Score décroissant</option>
+                    </select>
+                </div>
             </div>
 
             <div class="products" [class.blurred]="isLoading">

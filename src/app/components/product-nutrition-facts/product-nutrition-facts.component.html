@@ -33,7 +33,7 @@
                                     <td *ngIf="!product.fat_100g && product.fat_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
-                                    <td class="nutritional-title">&emsp;Graisses saturées</td>
+                                    <td class="nutritional-title">&emsp;• Graisses saturées</td>
                                     <td *ngIf="product.saturated_fat_100g || product.saturated_fat_100g === 0">{{ product.saturated_fat_100g | number : '1.0-2' }}g</td>
                                     <td *ngIf="!product.saturated_fat_100g && product.saturated_fat_100g !== 0" class="not-available">N/A</td>
                                 </tr>
@@ -43,7 +43,7 @@
                                     <td *ngIf="!product.carbohydrates_100g && product.carbohydrates_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
-                                    <td class="nutritional-title">&emsp;Sucres</td>
+                                    <td class="nutritional-title">&emsp;• Sucres</td>
                                     <td *ngIf="product.sugars_100g || product.sugars_100g === 0">{{ product.sugars_100g | number : '1.0-2' }}g</td>
                                     <td *ngIf="!product.sugars_100g && product.sugars_100g !== 0" class="not-available">N/A</td>
                                 </tr>
@@ -63,7 +63,7 @@
                                     <td *ngIf="!product.salt_100g && product.salt_100g !== 0" class="not-available">N/A</td>
                                 </tr>
                                 <tr>
-                                    <td class="nutritional-title">&emsp;Sodium</td>
+                                    <td class="nutritional-title">&emsp;• Sodium</td>
                                     <td *ngIf="product.sodium_100g || product.sodium_100g === 0">{{ product.sodium_100g | number : '1.0-2' }}g</td>
                                     <td *ngIf="!product.sodium_100g && product.sodium_100g !== 0" class="not-available">N/A</td>
                                 </tr>

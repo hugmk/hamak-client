@@ -18,6 +18,7 @@ export class SearchResultsComponent {
   public totalProducts = 0;
   public searchTerm = "";
   public isLoading = false;
+  public selectedFilter: string = "";
 
   constructor(private productsService: ProductsService, private router: Router, 
     private spinnerService: SpinnerService) { }
@@ -97,4 +98,13 @@ export class SearchResultsComponent {
   onClickProduct(product: Product) {
     this.router.navigateByUrl('/productMain', { state: { product: product } });
   }
+
+  applyFilter(): void {
+    if (this.selectedFilter === 'asc') {
+      this.resultProducts.sort((a, b) => a.calculatedScore - b.calculatedScore);
+    } else if (this.selectedFilter === 'desc') {
+      this.resultProducts.sort((a, b) => b.calculatedScore - a.calculatedScore);
+    }
+  }
+  
 }

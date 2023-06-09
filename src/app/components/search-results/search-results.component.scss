@@ -26,14 +26,25 @@
             flex-direction: column;
             justify-content: space-between;
 
-            .results-title {
-                font-size: 26px;
+            .results-header {
                 margin-bottom: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
 
-                .search-term {
-                    font-style: italic;
+                .results-title {
+                    font-size: 26px;
+    
+                    .search-term {
+                        font-style: italic;
+                    }
+                }
+
+                .filter-results {
+
                 }
             }
+            
 
             .products {
                 display: flex;
