@@ -19,6 +19,7 @@ export class SearchResultsComponent {
   public searchTerm = "";
   public isLoading = false;
   public selectedFilter: string = "";
+  public sorting = "";
 
   constructor(private productsService: ProductsService, private router: Router, 
     private spinnerService: SpinnerService) { }
@@ -28,11 +29,12 @@ export class SearchResultsComponent {
     this.isLoading = true;
     console.log(history.state.searchTerm);
     this.searchTerm = history.state.searchTerm;
-    this.productsService.searchProducts(this.searchTerm, 1, LIMIT_PER_PAGE).subscribe(res => {
+    this.productsService.searchProducts(this.searchTerm, 1, LIMIT_PER_PAGE, this.sorting).subscribe(res => {
       this.resultProducts = res.products;
       this.currentPage = res.currentPage;
       this.totalPages = res.totalPages;
       this.totalProducts = res.totalProducts;
+      this.sorting = res.sort;
       this.spinnerService.hideSpinner();
       this.isLoading = false;
     });
@@ -73,11 +75,12 @@ export class SearchResultsComponent {
     console.log("go to page number " + pageNb);
     this.spinnerService.showSpinner();
     this.isLoading = true;
-    this.productsService.searchProducts(this.searchTerm, pageNb, LIMIT_PER_PAGE).subscribe(res => {
+    this.productsService.searchProducts(this.searchTerm, pageNb, LIMIT_PER_PAGE, this.sorting).subscribe(res => {
       this.resultProducts = res.products;
       this.currentPage = res.currentPage;
       this.totalPages = res.totalPages;
       this.totalProducts = res.totalProducts;
+      this.sorting = res.sort;
       this.spinnerService.hideSpinner();
       this.isLoading = false;
     });
@@ -100,11 +103,19 @@ export class SearchResultsComponent {
   }
 
   applyFilter(): void {
-    if (this.selectedFilter === 'asc') {
-      this.resultProducts.sort((a, b) => a.calculatedScore - b.calculatedScore);
-    } else if (this.selectedFilter === 'desc') {
-      this.resultProducts.sort((a, b) => b.calculatedScore - a.calculatedScore);
-    }
+    this.sorting = this.selectedFilter;
+    this.spinnerService.showSpinner();
+    this.isLoading = true;
+    console.log("filter : " + this.selectedFilter);
+    this.productsService.searchProducts(this.searchTerm, 1, LIMIT_PER_PAGE, this.sorting).subscribe(res => {
+      this.resultProducts = res.products;
+      this.currentPage = res.currentPage;
+      this.totalPages = res.totalPages;
+      this.totalProducts = res.totalProducts;
+      this.sorting = res.sort;
+      this.spinnerService.hideSpinner();
+      this.isLoading = false;
+    });
   }
   
 }

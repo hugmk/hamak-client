@@ -21,8 +21,8 @@ export class ProductsService {
     return this.http.get<Product[]>(url);
   }
 
-  searchProducts(searchTerm: string, pageNum: number, limit: number): Observable<SearchResult> {
-    const url = "http://localhost:3000/api/products/search?q=" + searchTerm + "&page=" + pageNum + "&limit=" + limit;
+  searchProducts(searchTerm: string, pageNum: number, limit: number, sort: string | undefined): Observable<SearchResult> {
+    let url = "http://localhost:3000/api/products/search?q=" + searchTerm + "&page=" + pageNum + "&limit=" + limit + '&sort=' + sort;
     return this.http.get<SearchResult>(url);
   }
 }

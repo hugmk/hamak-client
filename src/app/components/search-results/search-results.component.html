@@ -6,8 +6,9 @@
                     {{ totalProducts }} résultat(s) pour
                     <span class="search-term">"{{ searchTerm }}"</span>
                 </div>
-                <div class="filter-results">
+                <div class="filter-results" *ngIf="resultProducts.length > 0">
                     <select [(ngModel)]="selectedFilter" (change)="applyFilter()">
+                        <option value="" selected>Tri par défaut</option>
                         <option value="asc">Score croissant</option>
                         <option value="desc">Score décroissant</option>
                     </select>
@@ -43,7 +44,7 @@
                 </button>
             </div>
 
-            <div class="pagination" [class.blurred]="isLoading">
+            <div class="pagination" [class.blurred]="isLoading"  *ngIf="resultProducts.length > 0">
                 <div class="pagination-container">
                     <button class="prev-button button" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
                         <img src="../../../assets/chevron-left.svg" alt="">
