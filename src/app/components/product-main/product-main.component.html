@@ -37,7 +37,7 @@
 
                         <div class="ingredients">
                             <span class="ingredients-title">Ingrédients : </span>
-                            <span *ngIf="product.ingredients">{{ product.ingredients }}</span>
+                            <span *ngIf="product.ingredients">{{ (product.ingredients.length > 400) ? (product.ingredients | slice:0:400) + '...':(product.ingredients) }}</span>
                             <span *ngIf="!product.ingredients" class="unknown-ingredients">N/A</span>
                         </div>
 

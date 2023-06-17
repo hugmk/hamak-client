@@ -26,7 +26,7 @@
                         <div class="product-info">
                             <div class="main-info">
                                 <div class="product-title">
-                                    {{ (product.name.length > 24) ? (product.name | slice:0:24) + '...':(product.name) }}
+                                    {{ (product.name.length > 18) ? (product.name | slice:0:18) + '...':(product.name) }}
                                     <span class="product-quantity" *ngIf="product.quantity">
                                         - {{ (product.quantity.length > 8) ? (product.quantity | slice:0:8) + '...':(product.quantity) }}
                                     </span>

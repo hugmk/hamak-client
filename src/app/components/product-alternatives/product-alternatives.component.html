@@ -37,7 +37,7 @@
                                 <div class="alternative-info">
                                     <div class="main-info">
                                         <div class="alternative-title">
-                                            {{ (alternative.name.length > 24) ? (alternative.name | slice:0:24) + '...':(alternative.name) }}
+                                            {{ (alternative.name.length > 16) ? (alternative.name | slice:0:16) + '...':(alternative.name) }}
                                             <span class="alternative-quantity" *ngIf="alternative.quantity">
                                                 - {{ alternative.quantity }}
                                             </span>
