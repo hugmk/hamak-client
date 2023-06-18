@@ -24,7 +24,6 @@
             height: 90%;
             position: relative;
             flex-direction: column;
-            background-color: antiquewhite;
             margin: 5% 5% 0 5%;
 
             .product-container {
@@ -32,7 +31,6 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                background-color: red;
 
                 .product-info {
                     margin: 1%;
@@ -49,25 +47,63 @@
                 }
             }
 
-            .charts-section {
+            .charts {
                 display: flex;
-                justify-content: space-around;
-                align-items: center;
+                flex-direction: column;
+                margin-bottom: 15px;
                 height: 100%;
 
-                .chart-one {
-                    background-color: rosybrown;
-                    width: 48%;
-                    height: 80%;
+                .analysis-title {
+                    margin-top: 15px;
+                    font-size: 26px;
+                    margin-bottom: 15px;
+                    margin-left: 1%;
                 }
 
-                .chart-two {
-                    background-color: violet;
-                    width: 48%;
-                    height: 80%;
+                .no-analysis {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: -10%;
+
+                    img {
+                        width: 50px;
+                        filter: invert(48%) sepia(0%) saturate(1821%) hue-rotate(317deg) brightness(94%) contrast(98%);
+                    }
+
+                    .no-analysis-message {
+                        font-size: 26px;
+                        color: #737373;
+                    }
                 }
 
+                .charts-section {
+                    display: flex;
+                    justify-content: space-around;
+                    height: 100%;
+                    width: 100%;
+                    gap: 50px;
+    
+                    .chart-container {
+                        height: 80%;
+                        width: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .chart {
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+    
+                }
             }
+            
         }
 
         .right-button {

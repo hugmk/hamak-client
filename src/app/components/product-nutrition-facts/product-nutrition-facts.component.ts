@@ -18,7 +18,7 @@ export class ProductNutritionFactsComponent {
   ngOnInit() {
     this.product = history.state.product;
     console.log(this.product);
-    this.createChart();    
+    this.createChart();
   }
 
   createChart(){

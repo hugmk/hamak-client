@@ -16,14 +16,29 @@
                 </div>
             </div>
 
-            <div class="charts-section">
-                <div class="chart-one">
-                    chart one
+            <div class="charts">
+                <div class="analysis-title" *ngIf="hasAnalysis">Analyses BI</div>
+                <div class="no-analysis" *ngIf="!hasAnalysis && !isLoading">
+                    <div class="cross-icon">
+                        <img src="../../../assets/cross.svg" alt="">
+                    </div>
+                    <div class="no-analysis-message">
+                        Nous n'avons pas pu analyser ce produit.
+                    </div>
                 </div>
-                <div class="chart-two">
-                    chart two
+                <div class="charts-section" *ngIf="hasAnalysis">
+                    <div class="chart-container">
+                        <div class="chart">
+                            <canvas id="BestWorstChart">{{ bestWorstComparisonChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <canvas id="AveragesChart" >{{ averagesChart }}</canvas>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>            
         </div>
 
         <button class="button right-button" (click)="onAlternatives()" *ngIf="showAlternativesBtn">
