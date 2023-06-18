@@ -98,7 +98,7 @@ export class ProductAnalysisComponent {
           
           title: {
             display: true,
-            text: 'Comparaison du score avec les meilleurs et les pires produits dans la catégorie : ' + this.product.mainCategory
+            text: 'Comparaison du score avec les meilleurs et les pires produits de la catégorie : ' + this.product.mainCategory
           }
         },
         scales: {
@@ -153,10 +153,7 @@ export class ProductAnalysisComponent {
       },
       options: {
         responsive: true,
-        plugins: {          
-          legend: {
-            onClick: (event, legendItem) => {}
-          },
+        plugins: {
           title: {
             display: true,
             text: 'Comparaison des informations nutritionnelles (pour 100g) avec les moyennes des produits de la catégorie : ' + this.product.mainCategory
