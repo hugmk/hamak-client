@@ -20,7 +20,18 @@ export class ProductAnalysisComponent {
   public worstProducts: Product[] = [];
   public averages!: Averages;
   public bestWorstComparisonChart: any;
-  public averagesChart: any;
+  public fatChart: any;
+  public saturatedFatChart: any;
+  public carbohydratesChart: any;
+  public sugarsChart: any;
+  public proteinsChart: any;
+  public fibersChart: any;
+  public saltChart: any;
+  public sodiumChart: any;
+  public scoreChart: any;
+  public ecoScoreChart: any;
+  
+  public showingChart = "BestWorstChart";
 
   constructor(private router: Router, private productsService: ProductsService,
     private spinnerService: SpinnerService) { }
@@ -34,6 +45,7 @@ export class ProductAnalysisComponent {
       this.spinnerService.showSpinner();
       this.isLoading = true;
       this.productsService.getBIAnalysis(this.product.mainCategory).subscribe(res => {
+        console.log(this.product);
         this.bestProducts = res.bestProducts;
         this.worstProducts = res.worstProducts;
         this.averages = res.averages;
@@ -41,7 +53,6 @@ export class ProductAnalysisComponent {
           this.hasAnalysis = true;
           setTimeout(() => {
             this.createBestWorstChart();
-            this.createAveragesChart();
           }, 0);
         }
         this.spinnerService.hideSpinner();
@@ -94,11 +105,10 @@ export class ProductAnalysisComponent {
         plugins: {
           legend: {
             display: false
-          },
-          
+          },          
           title: {
             display: true,
-            text: 'Comparaison du score avec les meilleurs et les pires produits de la catégorie : ' + this.product.mainCategory
+            text: 'Comparaison du Score avec les meilleurs et les pires produits de la catégorie'
           }
         },
         scales: {
@@ -109,14 +119,38 @@ export class ProductAnalysisComponent {
             beginAtZero: true,
             max: 100
           }
-        }
+        },
+        onClick: (event, activeElements) => {
+          if (activeElements.length > 0) {
+            const index = activeElements[0].index;
+            const product = sortedProducts[index];
+            if (product === this.product) {
+              return;
+            }
+            this.onClickProduct(product);
+          }
+        },
+        onHover: (event, activeElements) => {
+          if (activeElements?.length > 0) {
+            const index = activeElements[0].index;
+            const product = sortedProducts[index];
+            if (product === this.product) {
+              (event.native!.target as any).style.cursor = 'auto';
+            }
+            else {
+              (event.native!.target as any).style.cursor = 'pointer';
+            }
+          } else {
+            (event.native!.target as any).style.cursor = 'auto';
+          }
+        },
       }
     });
   }
 
-  createAveragesChart(){
-    const labels = ["Matières grasses", "Graisses saturées", "Glucides", "Sucres", "Protéines", "Fibres", "Sel", "Sodium"];
-    this.averagesChart = new Chart("AveragesChart", {
+  createScoreChart(){
+    const labels = ["Score"];
+    this.scoreChart = new Chart("ScoreChart", {
       type: "bar",
       data: {
         labels: labels,
@@ -124,13 +158,393 @@ export class ProductAnalysisComponent {
           {
             label: this.product.name,
             data: [
-              this.product.fat_100g,
-              this.product.saturated_fat_100g,
-              this.product.carbohydrates_100g,
-              this.product.sugars_100g,
-              this.product.proteins_100g,
-              this.product.fiber_100g,
-              this.product.salt_100g,
+              Math.round(this.product.calculatedScore)
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageScore)
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison du Score avec la moyenne des produits de la catégorie'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createEcoScoreChart(){
+    const labels = ["Éco-score"];
+    this.ecoScoreChart = new Chart("EcoScoreChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              Math.round(this.product.ecoscoreScore)
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageEcoscore)
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de l\'Éco-score avec la moyenne des produits de la catégorie'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createFatChart(){
+    const labels = ["Matières grasses"];
+    this.fatChart = new Chart("FatChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.fat_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageFat * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Matières grasses avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createSaturatedFatChart(){
+    const labels = ["Graisses saturées"];
+    this.saturatedFatChart = new Chart("SaturatedFatChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.saturated_fat_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageSaturatedFat * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Graisses saturées avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createCarbohydratesChart(){
+    const labels = ["Glucides"];
+    this.carbohydratesChart = new Chart("CarbohydratesChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.carbohydrates_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageCarbohydrates * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Glucides avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createSugarsChart(){
+    const labels = ["Sucres"];
+    this.sugarsChart = new Chart("SugarsChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.sugars_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageSugars * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Sucres avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createProteinsChart(){
+    const labels = ["Protéines"];
+    this.proteinsChart = new Chart("ProteinsChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.proteins_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageProteins * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Protéines avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createFibersChart(){
+    const labels = ["Fibres"];
+    this.fibersChart = new Chart("FibersChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.fiber_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageFiber * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Fibres avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createSaltChart(){
+    const labels = ["Sel"];
+    this.saltChart = new Chart("SaltChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.salt_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageSalt * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Sel avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createSodiumChart(){
+    const labels = ["Sodium"];
+    this.sodiumChart = new Chart("SodiumChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
               this.product.sodium_100g
             ],
             backgroundColor: "#3982fb"
@@ -138,13 +552,6 @@ export class ProductAnalysisComponent {
           {
             label: "Moyennes des autres produits",
             data: [
-              Math.round(this.averages.averageFat * 100) / 100,
-              Math.round(this.averages.averageSaturatedFat * 100) / 100,
-              Math.round(this.averages.averageCarbohydrates * 100) / 100,
-              Math.round(this.averages.averageSugars * 100) / 100,
-              Math.round(this.averages.averageProteins * 100) / 100,
-              Math.round(this.averages.averageFiber * 100) / 100,
-              Math.round(this.averages.averageSalt * 100) / 100,
               Math.round(this.averages.averageSodium * 100) / 100
             ],
             backgroundColor: "rgba(240, 192, 110, 0.8)"
@@ -154,13 +561,163 @@ export class ProductAnalysisComponent {
       options: {
         responsive: true,
         plugins: {
+          legend: {
+            display: false
+          },
           title: {
             display: true,
-            text: 'Comparaison des informations nutritionnelles (pour 100g) avec les moyennes des produits de la catégorie : ' + this.product.mainCategory
+            text: 'Comparaison de la teneur en Sodium avec la moyenne des produits de la catégorie (g/100g)'
+          }
+        },
+        scales: {
+          x: {
+            display: false
           }
         }
       }
     });
+  }
+
+  // createAveragesChart(){
+  //   const labels = ["Matières grasses", "Graisses saturées", "Glucides", "Sucres", "Protéines", "Fibres", "Sel", "Sodium"];
+  //   this.averagesChart = new Chart("AveragesChart", {
+  //     type: "bar",
+  //     data: {
+  //       labels: labels,
+  //       datasets: [
+  //         {
+  //           label: this.product.name,
+  //           data: [
+  //             this.product.fat_100g,
+  //             this.product.saturated_fat_100g,
+  //             this.product.carbohydrates_100g,
+  //             this.product.sugars_100g,
+  //             this.product.proteins_100g,
+  //             this.product.fiber_100g,
+  //             this.product.salt_100g,
+  //             this.product.sodium_100g
+  //           ],
+  //           backgroundColor: "#3982fb"
+  //         },
+  //         {
+  //           label: "Moyennes des autres produits",
+  //           data: [
+  //             Math.round(this.averages.averageFat * 100) / 100,
+  //             Math.round(this.averages.averageSaturatedFat * 100) / 100,
+  //             Math.round(this.averages.averageCarbohydrates * 100) / 100,
+  //             Math.round(this.averages.averageSugars * 100) / 100,
+  //             Math.round(this.averages.averageProteins * 100) / 100,
+  //             Math.round(this.averages.averageFiber * 100) / 100,
+  //             Math.round(this.averages.averageSalt * 100) / 100,
+  //             Math.round(this.averages.averageSodium * 100) / 100
+  //           ],
+  //           backgroundColor: "rgba(240, 192, 110, 0.8)"
+  //         }          
+  //       ]
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       plugins: {
+  //         title: {
+  //           display: true,
+  //           text: 'Comparaison des informations nutritionnelles (pour 100g) avec les moyennes des produits de la catégorie'
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
+
+  onChooseChart(chartName: string) {
+    switch (chartName) {
+      case "BestWorstChart":
+        this.showingChart = "BestWorstChart";
+        setTimeout(() => {
+          this.createBestWorstChart();
+        }, 0);
+        break;
+
+      case "ScoreChart":
+        this.showingChart = "ScoreChart";
+        setTimeout(() => {
+          this.createScoreChart();
+        }, 0);
+        break;
+
+      case "EcoScoreChart":
+        this.showingChart = "EcoScoreChart";
+        setTimeout(() => {
+          this.createEcoScoreChart();
+        }, 0);
+        break;
+
+      case "FatChart":
+        this.showingChart = "FatChart";
+        setTimeout(() => {
+          this.createFatChart();
+        }, 0);
+        break;
+
+      case "SaturatedFatChart":
+        this.showingChart = "SaturatedFatChart";
+        setTimeout(() => {
+          this.createSaturatedFatChart();
+        }, 0);
+        break;
+
+      case "CarbohydratesChart":
+        this.showingChart = "CarbohydratesChart";
+        setTimeout(() => {
+          this.createCarbohydratesChart();
+        }, 0);
+        break;
+    
+      case "SugarsChart":
+        this.showingChart = "SugarsChart";
+        setTimeout(() => {
+          this.createSugarsChart();
+        }, 0);
+        break;
+
+      case "ProteinsChart":
+        this.showingChart = "ProteinsChart";
+        setTimeout(() => {
+          this.createProteinsChart();
+        }, 0);
+        break;
+
+      case "FibersChart":
+        this.showingChart = "FibersChart";
+        setTimeout(() => {
+          this.createFibersChart();
+        }, 0);
+        break;
+
+      case "SaltChart":
+        this.showingChart = "SaltChart";
+        setTimeout(() => {
+          this.createSaltChart();
+        }, 0);
+        break;
+
+      case "SodiumChart":
+        this.showingChart = "SodiumChart";
+        setTimeout(() => {
+          this.createSodiumChart();
+        }, 0);
+        break;
+
+      default:
+        this.showingChart = "BestWorstChart";
+        setTimeout(() => {
+          this.createBestWorstChart();
+        }, 0);
+        break;
+    }
+    
+  }
+
+  onClickProduct(product: Product) {
+    this.router.navigateByUrl('/productMain', { state: { product: product } });
   }
 
   onNutritionFacts() {

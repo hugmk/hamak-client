@@ -17,7 +17,7 @@
             </div>
 
             <div class="charts">
-                <div class="analysis-title" *ngIf="hasAnalysis">Analyses BI</div>
+                <div class="analysis-title" *ngIf="hasAnalysis">Comparaison avec les autres produits de la catégorie <span class="category-name">{{ product.mainCategory }}</span></div>
                 <div class="no-analysis" *ngIf="!hasAnalysis && !isLoading">
                     <div class="cross-icon">
                         <img src="../../../assets/cross.svg" alt="">
@@ -26,15 +26,95 @@
                         Nous n'avons pas pu analyser ce produit.
                     </div>
                 </div>
+                <div class="chart-choices" *ngIf="hasAnalysis">
+                    <button class="button chart-button" (click)="onChooseChart('BestWorstChart')" [class.selected]="showingChart == 'BestWorstChart'">
+                        Meilleurs/Pires
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('ScoreChart')" [class.selected]="showingChart == 'ScoreChart'">
+                        Score
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('EcoScoreChart')" [class.selected]="showingChart == 'EcoScoreChart'">
+                        Éco-score
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('FatChart')" [class.selected]="showingChart == 'FatChart'">
+                        Matières grasses
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('SaturatedFatChart')" [class.selected]="showingChart == 'SaturatedFatChart'">
+                        Graisses saturées
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('CarbohydratesChart')" [class.selected]="showingChart == 'CarbohydratesChart'">
+                        Glucides
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('SugarsChart')" [class.selected]="showingChart == 'SugarsChart'">
+                        Sucres
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('ProteinsChart')" [class.selected]="showingChart == 'ProteinsChart'">
+                        Protéines
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('FibersChart')" [class.selected]="showingChart == 'FibersChart'">
+                        Fibres
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('SaltChart')" [class.selected]="showingChart == 'SaltChart'">
+                        Sel
+                    </button>
+                    <button class="button chart-button" (click)="onChooseChart('SodiumChart')" [class.selected]="showingChart == 'SodiumChart'">
+                        Sodium
+                    </button>
+                </div>
                 <div class="charts-section" *ngIf="hasAnalysis">
-                    <div class="chart-container">
+                    <div class="chart-container" *ngIf="showingChart == 'BestWorstChart'">
                         <div class="chart">
                             <canvas id="BestWorstChart">{{ bestWorstComparisonChart }}</canvas>
                         </div>
                     </div>
-                    <div class="chart-container">
+                    <div class="chart-container" *ngIf="showingChart == 'ScoreChart'">
                         <div class="chart">
-                            <canvas id="AveragesChart" >{{ averagesChart }}</canvas>
+                            <canvas id="ScoreChart" >{{ scoreChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'EcoScoreChart'">
+                        <div class="chart">
+                            <canvas id="EcoScoreChart" >{{ ecoScoreChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'FatChart'">
+                        <div class="chart">
+                            <canvas id="FatChart" >{{ fatChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'SaturatedFatChart'">
+                        <div class="chart">
+                            <canvas id="SaturatedFatChart" >{{ saturatedFatChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'CarbohydratesChart'">
+                        <div class="chart">
+                            <canvas id="CarbohydratesChart" >{{ carbohydratesChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'SugarsChart'">
+                        <div class="chart">
+                            <canvas id="SugarsChart" >{{ sugarsChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'ProteinsChart'">
+                        <div class="chart">
+                            <canvas id="ProteinsChart" >{{ proteinsChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'FibersChart'">
+                        <div class="chart">
+                            <canvas id="FibersChart" >{{ fibersChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'SaltChart'">
+                        <div class="chart">
+                            <canvas id="SaltChart" >{{ saltChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'SodiumChart'">
+                        <div class="chart">
+                            <canvas id="SodiumChart" >{{ sodiumChart }}</canvas>
                         </div>
                     </div>
                 </div>

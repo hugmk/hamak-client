@@ -58,6 +58,10 @@
                     font-size: 26px;
                     margin-bottom: 15px;
                     margin-left: 1%;
+
+                    .category-name {
+                        font-style: italic;
+                    }
                 }
 
                 .no-analysis {
@@ -78,16 +82,39 @@
                     }
                 }
 
+                .chart-choices {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 9px;
+                    flex-wrap: wrap;
+                    margin-bottom: 15px;
+
+                    .chart-button {
+                        padding: 5px 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 15px;
+                        border-radius: 20px;
+                        border: solid 2px rgba(240, 192, 110, 0.8);
+
+                        &.selected {
+                            background-color: rgba(240, 192, 110, 0.8);
+                            font-weight: 500;
+                            pointer-events: none;
+                        }
+                    }
+                }
+
                 .charts-section {
                     display: flex;
+                    flex-wrap: wrap;
                     justify-content: space-around;
-                    height: 100%;
-                    width: 100%;
-                    gap: 50px;
+                    gap: 1%;
     
                     .chart-container {
-                        height: 80%;
-                        width: 50%;
+                        width: 60%;
                         display: flex;
                         justify-content: center;
                         align-items: center;

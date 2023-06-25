@@ -28,7 +28,13 @@ export class ProductNutritionFactsComponent {
         labels: this.pieChartFields,
         datasets: [
           {
-            data: [this.product.fat_100g, this.product.carbohydrates_100g, this.product.fiber_100g, this.product.proteins_100g, this.product.salt_100g],
+            data: [
+              Math.round(this.product.fat_100g * 100) / 100,
+              Math.round(this.product.carbohydrates_100g * 100) / 100,
+              Math.round(this.product.fiber_100g * 100) / 100,
+              Math.round(this.product.proteins_100g * 100) / 100,
+              Math.round(this.product.salt_100g * 100) / 100
+            ],
           }
         ]
       },
