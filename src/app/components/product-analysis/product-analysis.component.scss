@@ -104,6 +104,13 @@
                             font-weight: 500;
                             pointer-events: none;
                         }
+
+                        &.disabled {
+                            background-color: #73737365;
+                            border: solid 2px #73737365;
+                            opacity: 0.6;
+                            pointer-events: none;
+                        }
                     }
                 }
 

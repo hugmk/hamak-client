@@ -72,7 +72,6 @@ export class SearchResultsComponent {
   }  
 
   goToPage(pageNb: number): void {
-    console.log("go to page number " + pageNb);
     this.spinnerService.showSpinner();
     this.isLoading = true;
     this.productsService.searchProducts(this.searchTerm, pageNb, LIMIT_PER_PAGE, this.sorting).subscribe(res => {

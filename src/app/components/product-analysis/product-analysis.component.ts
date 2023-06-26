@@ -32,6 +32,7 @@ export class ProductAnalysisComponent {
   public ecoScoreChart: any;
   
   public showingChart = "BestWorstChart";
+  public availableCharts: string[] = [];
 
   constructor(private router: Router, private productsService: ProductsService,
     private spinnerService: SpinnerService) { }
@@ -45,12 +46,13 @@ export class ProductAnalysisComponent {
       this.spinnerService.showSpinner();
       this.isLoading = true;
       this.productsService.getBIAnalysis(this.product.mainCategory).subscribe(res => {
-        console.log(this.product);
         this.bestProducts = res.bestProducts;
         this.worstProducts = res.worstProducts;
         this.averages = res.averages;
         if(this.bestProducts.length > 0 && this.worstProducts.length > 0 && this.averages) {
           this.hasAnalysis = true;
+          this.getAvailableCharts();
+          console.log(this.availableCharts);
           setTimeout(() => {
             this.createBestWorstChart();
           }, 0);
@@ -628,92 +630,128 @@ export class ProductAnalysisComponent {
   // }
 
   onChooseChart(chartName: string) {
-    switch (chartName) {
-      case "BestWorstChart":
-        this.showingChart = "BestWorstChart";
-        setTimeout(() => {
-          this.createBestWorstChart();
-        }, 0);
-        break;
+    if(this.availableCharts.includes(chartName)) {
+      switch (chartName) {
+        case "BestWorstChart":
+          this.showingChart = "BestWorstChart";
+          setTimeout(() => {
+            this.createBestWorstChart();
+          }, 0);
+          break;
+  
+        case "ScoreChart":
+          this.showingChart = "ScoreChart";
+          setTimeout(() => {
+            this.createScoreChart();
+          }, 0);
+          break;
+  
+        case "EcoScoreChart":
+          this.showingChart = "EcoScoreChart";
+          setTimeout(() => {
+            this.createEcoScoreChart();
+          }, 0);
+          break;
+  
+        case "FatChart":
+          this.showingChart = "FatChart";
+          setTimeout(() => {
+            this.createFatChart();
+          }, 0);
+          break;
+  
+        case "SaturatedFatChart":
+          this.showingChart = "SaturatedFatChart";
+          setTimeout(() => {
+            this.createSaturatedFatChart();
+          }, 0);
+          break;
+  
+        case "CarbohydratesChart":
+          this.showingChart = "CarbohydratesChart";
+          setTimeout(() => {
+            this.createCarbohydratesChart();
+          }, 0);
+          break;
+      
+        case "SugarsChart":
+          this.showingChart = "SugarsChart";
+          setTimeout(() => {
+            this.createSugarsChart();
+          }, 0);
+          break;
+  
+        case "ProteinsChart":
+          this.showingChart = "ProteinsChart";
+          setTimeout(() => {
+            this.createProteinsChart();
+          }, 0);
+          break;
+  
+        case "FibersChart":
+          this.showingChart = "FibersChart";
+          setTimeout(() => {
+            this.createFibersChart();
+          }, 0);
+          break;
+  
+        case "SaltChart":
+          this.showingChart = "SaltChart";
+          setTimeout(() => {
+            this.createSaltChart();
+          }, 0);
+          break;
+  
+        case "SodiumChart":
+          this.showingChart = "SodiumChart";
+          setTimeout(() => {
+            this.createSodiumChart();
+          }, 0);
+          break;
+  
+        default:
+          this.showingChart = "BestWorstChart";
+          setTimeout(() => {
+            this.createBestWorstChart();
+          }, 0);
+          break;
+      }
+    }    
+  }
 
-      case "ScoreChart":
-        this.showingChart = "ScoreChart";
-        setTimeout(() => {
-          this.createScoreChart();
-        }, 0);
-        break;
+  getAvailableCharts() {
+    this.availableCharts.push('BestWorstChart');
 
-      case "EcoScoreChart":
-        this.showingChart = "EcoScoreChart";
-        setTimeout(() => {
-          this.createEcoScoreChart();
-        }, 0);
-        break;
-
-      case "FatChart":
-        this.showingChart = "FatChart";
-        setTimeout(() => {
-          this.createFatChart();
-        }, 0);
-        break;
-
-      case "SaturatedFatChart":
-        this.showingChart = "SaturatedFatChart";
-        setTimeout(() => {
-          this.createSaturatedFatChart();
-        }, 0);
-        break;
-
-      case "CarbohydratesChart":
-        this.showingChart = "CarbohydratesChart";
-        setTimeout(() => {
-          this.createCarbohydratesChart();
-        }, 0);
-        break;
-    
-      case "SugarsChart":
-        this.showingChart = "SugarsChart";
-        setTimeout(() => {
-          this.createSugarsChart();
-        }, 0);
-        break;
-
-      case "ProteinsChart":
-        this.showingChart = "ProteinsChart";
-        setTimeout(() => {
-          this.createProteinsChart();
-        }, 0);
-        break;
-
-      case "FibersChart":
-        this.showingChart = "FibersChart";
-        setTimeout(() => {
-          this.createFibersChart();
-        }, 0);
-        break;
-
-      case "SaltChart":
-        this.showingChart = "SaltChart";
-        setTimeout(() => {
-          this.createSaltChart();
-        }, 0);
-        break;
-
-      case "SodiumChart":
-        this.showingChart = "SodiumChart";
-        setTimeout(() => {
-          this.createSodiumChart();
-        }, 0);
-        break;
-
-      default:
-        this.showingChart = "BestWorstChart";
-        setTimeout(() => {
-          this.createBestWorstChart();
-        }, 0);
-        break;
+    if(this.product.calculatedScore || this.product.calculatedScore === 0) {
+      this.availableCharts.push('ScoreChart');
     }
-    
+    if(this.product.ecoscoreScore || this.product.ecoscoreScore === 0) {
+      this.availableCharts.push('EcoScoreChart');
+    }
+    if(this.product.fat_100g || this.product.fat_100g === 0) {
+      this.availableCharts.push('FatChart');
+    }
+    if(this.product.saturated_fat_100g || this.product.saturated_fat_100g === 0) {
+      this.availableCharts.push('SaturatedFatChart');
+    }
+    if(this.product.carbohydrates_100g || this.product.carbohydrates_100g === 0) {
+      this.availableCharts.push('CarbohydratesChart');
+    }
+    if(this.product.sugars_100g || this.product.sugars_100g === 0) {
+      this.availableCharts.push('SugarsChart');
+    }
+    if(this.product.proteins_100g || this.product.proteins_100g === 0) {
+      this.availableCharts.push('ProteinsChart');
+    }
+    if(this.product.fiber_100g || this.product.fiber_100g === 0) {
+      this.availableCharts.push('FibersChart');
+    }
+    if(this.product.salt_100g || this.product.salt_100g === 0) {
+      this.availableCharts.push('SaltChart');
+    }
+    if(this.product.sodium_100g || this.product.sodium_100g === 0) {
+      this.availableCharts.push('SodiumChart');
+    }
   }
 
   onClickProduct(product: Product) {

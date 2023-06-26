@@ -30,34 +30,34 @@
                     <button class="button chart-button" (click)="onChooseChart('BestWorstChart')" [class.selected]="showingChart == 'BestWorstChart'">
                         Meilleurs/Pires
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('ScoreChart')" [class.selected]="showingChart == 'ScoreChart'">
+                    <button class="button chart-button" (click)="onChooseChart('ScoreChart')" [class.selected]="showingChart == 'ScoreChart'" [class.disabled]="!availableCharts.includes('ScoreChart')">
                         Score
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('EcoScoreChart')" [class.selected]="showingChart == 'EcoScoreChart'">
+                    <button class="button chart-button" (click)="onChooseChart('EcoScoreChart')" [class.selected]="showingChart == 'EcoScoreChart'" [class.disabled]="!availableCharts.includes('EcoScoreChart')">
                         Éco-score
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('FatChart')" [class.selected]="showingChart == 'FatChart'">
+                    <button class="button chart-button" (click)="onChooseChart('FatChart')" [class.selected]="showingChart == 'FatChart'" [class.disabled]="!availableCharts.includes('FatChart')">
                         Matières grasses
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('SaturatedFatChart')" [class.selected]="showingChart == 'SaturatedFatChart'">
+                    <button class="button chart-button" (click)="onChooseChart('SaturatedFatChart')" [class.selected]="showingChart == 'SaturatedFatChart'" [class.disabled]="!availableCharts.includes('SaturatedFatChart')">
                         Graisses saturées
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('CarbohydratesChart')" [class.selected]="showingChart == 'CarbohydratesChart'">
+                    <button class="button chart-button" (click)="onChooseChart('CarbohydratesChart')" [class.selected]="showingChart == 'CarbohydratesChart'" [class.disabled]="!availableCharts.includes('CarbohydratesChart')">
                         Glucides
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('SugarsChart')" [class.selected]="showingChart == 'SugarsChart'">
+                    <button class="button chart-button" (click)="onChooseChart('SugarsChart')" [class.selected]="showingChart == 'SugarsChart'" [class.disabled]="!availableCharts.includes('SugarsChart')">
                         Sucres
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('ProteinsChart')" [class.selected]="showingChart == 'ProteinsChart'">
+                    <button class="button chart-button" (click)="onChooseChart('ProteinsChart')" [class.selected]="showingChart == 'ProteinsChart'" [class.disabled]="!availableCharts.includes('ProteinsChart')">
                         Protéines
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('FibersChart')" [class.selected]="showingChart == 'FibersChart'">
+                    <button class="button chart-button" (click)="onChooseChart('FibersChart')" [class.selected]="showingChart == 'FibersChart'" [class.disabled]="!availableCharts.includes('FibersChart')">
                         Fibres
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('SaltChart')" [class.selected]="showingChart == 'SaltChart'">
+                    <button class="button chart-button" (click)="onChooseChart('SaltChart')" [class.selected]="showingChart == 'SaltChart'" [class.disabled]="!availableCharts.includes('SaltChart')">
                         Sel
                     </button>
-                    <button class="button chart-button" (click)="onChooseChart('SodiumChart')" [class.selected]="showingChart == 'SodiumChart'">
+                    <button class="button chart-button" (click)="onChooseChart('SodiumChart')" [class.selected]="showingChart == 'SodiumChart'" [class.disabled]="!availableCharts.includes('SodiumChart')">
                         Sodium
                     </button>
                 </div>
