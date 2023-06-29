@@ -20,6 +20,7 @@ export class ProductAnalysisComponent {
   public worstProducts: Product[] = [];
   public averages!: Averages;
   public bestWorstComparisonChart: any;
+  public energyChart: any;
   public fatChart: any;
   public saturatedFatChart: any;
   public carbohydratesChart: any;
@@ -225,6 +226,49 @@ export class ProductAnalysisComponent {
           title: {
             display: true,
             text: 'Comparaison de l\'Éco-score avec la moyenne des produits de la catégorie'
+          }
+        },
+        scales: {
+          x: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  createEnergyChart(){
+    const labels = ["Énergie"];
+    this.energyChart = new Chart("EnergyChart", {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: this.product.name,
+            data: [
+              this.product.energy_kcal_100g
+            ],
+            backgroundColor: "#3982fb"
+          },
+          {
+            label: "Moyennes des autres produits",
+            data: [
+              Math.round(this.averages.averageEnergyKcal * 100) / 100
+            ],
+            backgroundColor: "rgba(240, 192, 110, 0.8)"
+          }          
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Comparaison de la teneur en Énergie avec la moyenne des produits de la catégorie (kCal/100g)'
           }
         },
         scales: {
@@ -652,6 +696,13 @@ export class ProductAnalysisComponent {
             this.createEcoScoreChart();
           }, 0);
           break;
+
+        case "EnergyChart":
+          this.showingChart = "EnergyChart";
+          setTimeout(() => {
+            this.createEnergyChart();
+          }, 0);
+          break;
   
         case "FatChart":
           this.showingChart = "FatChart";
@@ -727,6 +778,9 @@ export class ProductAnalysisComponent {
     }
     if(this.product.ecoscoreScore || this.product.ecoscoreScore === 0) {
       this.availableCharts.push('EcoScoreChart');
+    }
+    if(this.product.energy_kcal_100g || this.product.energy_kcal_100g === 0) {
+      this.availableCharts.push('EnergyChart');
     }
     if(this.product.fat_100g || this.product.fat_100g === 0) {
       this.availableCharts.push('FatChart');

@@ -36,6 +36,9 @@
                     <button class="button chart-button" (click)="onChooseChart('EcoScoreChart')" [class.selected]="showingChart == 'EcoScoreChart'" [class.disabled]="!availableCharts.includes('EcoScoreChart')">
                         Éco-score
                     </button>
+                    <button class="button chart-button" (click)="onChooseChart('EnergyChart')" [class.selected]="showingChart == 'EnergyChart'" [class.disabled]="!availableCharts.includes('EnergyChart')">
+                        Énergie
+                    </button>
                     <button class="button chart-button" (click)="onChooseChart('FatChart')" [class.selected]="showingChart == 'FatChart'" [class.disabled]="!availableCharts.includes('FatChart')">
                         Matières grasses
                     </button>
@@ -75,6 +78,11 @@
                     <div class="chart-container" *ngIf="showingChart == 'EcoScoreChart'">
                         <div class="chart">
                             <canvas id="EcoScoreChart" >{{ ecoScoreChart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container" *ngIf="showingChart == 'EnergyChart'">
+                        <div class="chart">
+                            <canvas id="EnergyChart" >{{ energyChart }}</canvas>
                         </div>
                     </div>
                     <div class="chart-container" *ngIf="showingChart == 'FatChart'">
